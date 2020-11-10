@@ -3,17 +3,25 @@
 
 <ul>
   <% @tasks.each do |task| %>
-  <li>
-    <h3><%= task.title %>: </h3>
-    <ul>
-      <li>
-       <p> <%= task.details %>. </p>
-     </li>
-     <li>
-       <p> Done? : <%= task.completed %> </p>
-     </li>
+  <div class="card">
+    <li>
+      <h3><%= link_to task.title, task_path(task) %>: </h3>
+      <ul>
+       <li>
+         <p> <%= task.completed == true ? 'I have completed this task' : 'I have not completed this task'  %> </p>
+       </li>
+       <li>
+         <%= link_to "Delete this task",
+         task_path(task),
+         method: :delete,
+         data: { confirm: "Are you really done you lazy bastard?" } %>
+       </li>
+     </div>
+     <br>
+     <% end %>
    </ul>
  </li>
- <% end %>
 </ul>
+
+<%= link_to 'Create new task', tasks_new_path %>
 
